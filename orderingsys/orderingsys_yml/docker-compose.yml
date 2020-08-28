@@ -1,0 +1,71 @@
+
+version: '3.3'
+
+services:
+
+
+  db:
+    restart: always
+    image: mysql:5.7
+    container_name: db
+    ports:
+      - "4306:3306"
+    network_mode: "bridge"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: ordering
+      MYSQL_USER: ordering
+      MYSQL_PASSWORD: 123456
+    volumes:
+      - ./Database/data:/var/lib/mysql
+      - ./Database/backup:/backup
+    command: --default-authentication-plugin=mysql_native_password --lower_case_table_names=1 --skip-name-resolve=false --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  redis:
+    restart: always
+    image: redis
+    container_name: redis
+    volumes:
+      - ./Redis/data:/data
+      - ./Redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./Redis/logs:/logs
+    command:
+      /bin/bash -c "echo 511 > /proc/sys/net/core/somaxconn
+      && echo never > /sys/kernel/mm/transparent_hugepage/enabled
+      && redis-server /usr/local/etc/redis/redis.conf"
+    ports:
+      - "6379:6379"
+
+  nginx:
+    restart: always
+    image: nginx
+    network_mode: "bridge"
+    expose:
+      - "81"
+    ports:
+      - "81:81"
+    volumes:
+      - "./Nginx/conf.d/:/etc/nginx/conf.d/"
+      - "./Nginx/resources/static/:/static/"
+      - "./Nginx/logs/:/var/log/nginx/"
+
+
+  ordering_service:
+ #   build: OrderingService
+    restart: always
+    image: ordering:v1.0
+    network_mode: "bridge"
+    expose:
+      - "9000"
+    ports:
+      - "9000:9000"
+    environment:
+      MARK_DB_MYSQL_NAME:
+      MARK_DB_MYSQL_HOST:
+      MARK_DB_MYSQL_USER:
+      MARK_DB_MYSQL_PASSWORD:
+      MARK_DB_MYSQL_PORT:
+    depends_on:
+      - nginx
+      - db
+    command: ./start.sh

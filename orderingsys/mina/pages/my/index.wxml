@@ -1,0 +1,139 @@
+<view class="container">
+  <view class="top-view">
+    <view class="user">
+      <view class="row">
+
+        <image class="avatar" wx:if="{{userInfo}}" src="{{userInfo.avatarUrl}}"></image>
+        <image class="avatar" wx:else="{{userInfo}}" src="/images/default.png"></image>
+
+        <view class="name" wx:if="{{userInfo}}">
+          <view bindtap="onClickLogout">{{userInfo.nickName}}</view>
+        </view>
+        <view class="name" wx:else="{{userInfo}}">
+          <navigator url="/pages/auth/auth">登录</navigator>
+          |
+          <navigator url="/pages/auth/auth">注册</navigator>
+        </view>
+
+
+      </view>
+      <view class="site">查看个人主页</view>
+    </view>
+
+    <view class="numbers">
+      <view class="row">
+        <text>0</text>
+        <text>关注</text>
+      </view>
+      <view class="row">
+        <text>0</text>
+        <text>粉丝</text>
+      </view>
+      <view class="row">
+        <text>0</text>
+        <text>赞与收藏</text>
+      </view>
+      <view class="row">
+        <text>0</text>
+        <text>好友动态</text>
+      </view>
+    </view>
+
+  </view>
+
+  <view class="middle-view">
+    <view class="item">
+      <image src="/images/icon/transaction_order1_icon_show.png"></image>
+      <text>银行卡</text>
+    </view>
+    <view class="item">
+      <image src="/images/icon/transaction_order2_icon_show.png"></image>
+      <text>卡包</text>
+    </view>
+    <view class="item">
+      <image src="/images/icon/transaction_order3_icon_show.png"></image>
+      <text>待支付</text>
+    </view>
+    <view class="item">
+      <image src="/images/icon/transaction_order4_icon_show.png"></image>
+      <text>余额</text>
+    </view>
+    <view class="item">
+      <image src="/images/icon/transaction_order5_icon_show.png"></image>
+      <text>账单</text>
+    </view>
+  </view>
+  <view class="function-view">
+    <view class="row">
+      <view class="left">我的钱包</view>
+      <view class="right">
+        <text>¥20</text>
+        <image class="go-icon" src='/images/icon/to_icon_show_small.png'></image>
+      </view>
+    </view>
+    <view class="row">
+      <view class="left">我的优惠券</view>
+      <view class="right">
+        <text>暂无劵可用</text>
+        <image class="go-icon" src='/images/icon/to_icon_show_small.png'></image>
+      </view>
+    </view>
+    <view class="row">
+      <view class="left">领劵中心</view>
+      <view class="right">
+        <text>你的福利都在这里</text>
+        <image class="go-icon" src='/images/icon/to_icon_show_small.png'></image>
+      </view>
+    </view>
+    <view class="row" bindtap="ToOrder">
+      <view class="left">我的订单</view>
+      <view class="right">
+        <text></text>
+        <image class="go-icon" src='/images/icon/to_icon_show_small.png'></image>
+      </view>
+    </view>
+    <view class="row" bindtap="ToAddress">
+      <view class="left">我的收货地址</view>
+      <view class="right">
+        <text></text>
+        <image class="go-icon" src='/images/icon/to_icon_show_small.png'></image>
+      </view>
+    </view>
+    <view class="row" bindtap="ToComment">
+      <view class="left" >我的评价</view>
+      <view class="right">
+        <text></text>
+        <image class="go-icon" src='/images/icon/to_icon_show_small.png'></image>
+      </view>
+    </view>
+    <view class="contact-view">
+      <button open-type="contact">
+        <image src="/images/icon/wechat_contact_icon_show.png"></image>
+      </button>
+      <button bindtap="onClickCall">
+        <image src="/images/icon/contactus_icon_show.png"></image>
+      </button>
+    </view>
+  </view>
+
+  <!-- <view class="userinfo">
+		<image wx:if="{{user_info && user_info.avatar_url}}" class="userinfo-avatar" src="{{ user_info.avatar_url }}" background-size="cover"></image>
+		<text class="userinfo-nickname">{{ user_info.nickname }}（手机：--）</text>
+	</view> -->
+  <!--<view style="height:20rpx;background: #eee;width:100%;"></view>-->
+  <!-- <view class="my-item">
+    <navigator url="/pages/my/order_list" hover-class="navigator-hover">我的订单</navigator>
+  </view>
+  <view class="my-item">
+    <navigator url="/pages/my/addressList" hover-class="navigator-hover">我的收货地址</navigator>
+  </view>
+
+  <view class="my-item">
+    <navigator url="/pages/my/commentList" hover-class="navigator-hover">我的评价</navigator>
+  </view>
+
+  <view style="height:20rpx;background: #eee;width:100%;"></view> -->
+  <!--<view class="version"></view>-->
+  <view style="height:20rpx;background: #eee;width:100%;"></view>
+
+</view>
